@@ -55,6 +55,7 @@ public class Main {
                     if (gapful(numb)) checkResult.add("gapful");
                     if (numb % 2 == 0) checkResult.add("even");
                     if (numb % 2 != 0) checkResult.add("odd");
+                    if (spyNumber(numb)) checkResult.add("spy");
                     for (String result : checkResult) {
                         if (result.equals(checkResult.get(checkResult.toArray().length-1)))
                             System.out.println(result);
@@ -80,6 +81,7 @@ public class Main {
         System.out.println("      gapful: " + gapful(numb));
         System.out.println("        even: " + even);
         System.out.println("         odd: " + odd);
+        System.out.println(spyNumber(numb));
     }
     public static boolean checkDuck(long numb) {
         for (int i = 1; i < String.valueOf(numb).length(); i++) {
@@ -100,5 +102,16 @@ public class Main {
         char[] numbStrArr = String.valueOf(numb).toCharArray();
         String cooncatFirstLast = String.valueOf(numbStrArr[0])+String.valueOf(numbStrArr[numbStrArr.length-1]);
         return numb % Integer.parseInt(cooncatFirstLast) == 0;
+    }
+    public static boolean spyNumber(long numb) {
+        long sum = 0;
+        long mult = 1;
+        for (char number : String.valueOf(numb).toCharArray()) {
+            sum += Long.parseLong(number.toString());
+        }
+        for (char number : String.valueOf(numb).toCharArray()) {
+            mult *= Long.parseLong(number.toString());
+        }
+        return sum == mult;
     }
 }
